@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <style media="screen">
+    * {margin:0; padding:0; list-style:none;}
+	img{ display:block;}
+	a{ text-decoration:none;}
+	.fl{ float:left;}
+	.fr{ float:right;}
+	.clearFix:after{ centent=''; display:block; clear:both;}
+	.clearFix{ zoom:1;}
+
+   /* 轮播样式 */
+    .box {width:16.0rem;overflow:hidden;}
+    .box ul {width:64rem; height:100%; transform:translateX(0px); position: relative;}
+    .box ul li {width:16rem; height:100%; float:left;  text-align: center; font-size:30px;  position: relative;}
+
+	.page1{ background: url('images/page1_bg.jpg'); background-size: cover; position: relative;}
+	.page2{ background: url('images/page1_bg.jpg'); background-size: cover; position: relative; }
+	.page3{ background: url('images/page3_bg.jpg'); background-size: cover; position: relative; }
+	.page4{ background: url('images/page4_bg.jpg'); background-size: cover; position: relative; }
+
+	/* 第一屏 */
+	.page1-txt{ width: 8.925rem; height: 5.0rem; position: absolute; left: 50%; top: 10%; margin-left: -4.49rem; }
+	.page1-txt img{ width: 8.925rem; height: 5.0rem;  }
+
+	.page1-move{ width: 5.725rem; height: 7.55rem; position: absolute; left: 50%; bottom: 2.075rem; margin-left: -2.86rem; }
+
+	/* 行动的人 */
+	.person{ width: 1.825rem; height: 3.225rem; position: absolute; left:2.0rem; z-index: 333; }
+	.person img{ width: 1.825rem; height: 3.225rem; }
+
+	/* 地球周围 */
+	.earth-round{ width: 5.725rem; height: 5.675rem; position: absolute; top: 1.875rem; z-index: 2; }
+	.earth-round1{ animation: 15s ww linear infinite forwards; }
+	.earth-round img{ width: 5.725rem; height: 5.675rem; }
+
+	/* 地球 */
+	.earth{ width: 3.325rem; height: 3.375rem; position: absolute; top:2.99rem; left: 1.2rem; z-index: 3;  }
+	.earth1{ animation: 15s ww linear infinite forwards; }
+	.earth img{ width: 3.325rem; height: 3.375rem; }
+
+	/*地球旋转*/  
+	@keyframes ww {  
+	from {  
+			transform: rotate(0deg)  
+		}  
+		to {  
+			transform: rotate(-360deg)  
+		}  
+	} 
+
+
+	/* 第二屏 */
+	/* 上边文字 */
+	.page2-txt1{ width:9.35rem; height: 3.65rem; position: absolute; left: 50%; top: 10%; margin-left: -4.66rem;  }
+	.page2-txt1 .img1{ width: 6.2rem; height: 0.625rem;  }
+	.page2-txt1 .img2{ width: 9.35rem; height: 2.775rem;  }
+	.page2-txt2{ width:4.825rem; height: 1.575rem; position: absolute; left: 50%; top: 30%; margin-left: -2.412rem; }
+	.page2-txt2 img{ width:4.825rem; height: 1.575rem; }
+
+	/* 下边图片 */
+	.page2-person{ width: 1.6rem; height: 3.275rem; position: absolute;  z-index: 3; }
+	.page2-person img{ width: 1.6rem; height: 3.275rem; }
+	/* 三个大问号 */
+	.q1{ width: 1.325rem; height: 1.35rem; position: absolute; left: -1.4rem; top: -1.025rem; }
+	.q1 img{ width: 1.325rem; height: 1.35rem; }
+
+	.q2{ width: 1.15rem; height: 1.875rem; position: absolute; left: 0.3rem; top: -2.3rem; }
+	.q2 img{ width: 1.15rem; height: 1.875rem; }
+
+	.q3{ width: 1.4rem; height: 1.225rem; position: absolute; left:1.55rem; top:-1.175rem; }
+	.q3 img{ width: 1.4rem; height: 1.225rem; }
+
+
+
+	/* 第三屏 */
+	.page3-txt1{ width: 13.05rem; height: 3.675rem; position: absolute; top: 20%; left: 50%; margin-left: -6.5rem;  }
+	.page3-txt1 img{ width: 13.05rem; height: 3.675rem; }
+
+	.page3-txt2{ width: 8.775rem; height: 4.5rem; position: absolute; top: 50%; left: 50%; margin-left: -4.35rem;  }
+	.page3-txt2 .page3-img1{ width: 8.775rem; height: 4.5rem; }
+	.page3-txt2 .page3-img2{ width: 2.05rem; height:2.05rem; position: absolute; top: 50%; left: 50%; margin-left: -1.002rem; margin-top: -1.002rem; }
+
+
+
+	/* 第四屏 */
+	.page4-txt1{ width: 5.275rem; height: 1.275rem; position: absolute; top: 20%; left: 50%; margin-left: -2.611rem; }
+	.page4-txt1 img{ width: 5.275rem; height: 1.275rem; }
+	.page4-txt2{ width: 6.95rem; height: 1.8rem; position: absolute; top: 80%; left: 50%; margin-left: -3.51rem; }
+	.page4-txt2 img{ width: 6.95rem; height: 1.8rem; }
+    </style>
+
+    <script>
+
+    //自适应设定
+    $(function(){
+    	function change(){
+        	document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+    	}
+    	change();
+    	$(window).on('resize',change);
+	});
+
+    //消除图片分辨率不匹配问题
+    $(function(){
+    	function change(){
+            var height1 = $(document).height();
+            $('#banner').css('height',height1);
+        }
+        change();
+        $(window).on('resize',change);
+        $('.page1-txt').addClass('animated fadeInDown');
+        $('.earth-round1 img').addClass('animated zoomIn');
+    });
+    
+    //左右滑动轮播图
+    $(function (){
+		var oBox=document.getElementById('banner');
+		var oUl=document.getElementsByTagName('ul')[0];
+		var aLi=oUl.children;
+
+		var translateX=0;
+
+		//为oBox添加绑定事件
+		oBox.addEventListener('touchstart', function (ev){
+			oUl.style.transition='none';
+
+			// 获取手指到页面的距离
+			var startX=ev.targetTouches[0].pageX;
+			var startY=ev.targetTouches[0].pageY;
+
+			var dir='';
+
+	        // 获取手指到盒子的距离
+	        var disX=ev.targetTouches[0].pageX-translateX;
+
+        	function fnMove(ev){
+				if(dir==''){
+					if(Math.abs(ev.targetTouches[0].pageX-startX)>=5){
+						dir='x';
+				}else if(
+					Math.abs(ev.targetTouches[0].pageY-startY)>=5){
+						dir='y';
+					}
+				}else{
+				//如果确定是横向拖动，纵向就阻止掉
+					if(dir=='x'){
+						translateX=ev.targetTouches[0].pageX-disX;
+
+						oUl.style.transform='translateX('+translateX+'px)';
+
+						ev.preventDefault();
+					}
+				}
+       		};
+        function fnEnd(ev){
+        	//判断 n为第几页
+			var n=Math.round(-translateX/aLi[0].offsetWidth);
+
+			//当n处于第一页时就保持在第一页；当为最后一页时就保持在最后一页
+			if(n<0){
+				n=0;
+			}else if(n>=aLi.length){
+				n=aLi.length-1;
+			}
+
+			//算出第n页时的translateX
+			translateX=-n*aLi[0].offsetWidth;
+
+			//为ul设置动画
+			oUl.style.transition='.7s all ease';
+			oUl.style.transform='translateX('+translateX+'px)';
+
+			//为第 n 页内容添加动画
+			if(n==0){
+				$('.page1-txt').addClass('animated fadeInDown');
+				$('.earth-round1 img').addClass('animated zoomIn')
+			} else {
+				$('.page1-txt').removeClass('animated fadeInDown');
+				$('.earth-round1 img').removeClass('animated zoomIn')
+			};
+
+			if(n==1){
+				$('.q1').addClass('animated zoomIn');
+				$('.q2').addClass('animated zoomIn');
+				$('.q3').addClass('animated zoomIn')
+			} else {
+				$('.q1').removeClass('animated zoomIn');
+				$('.q2').removeClass('animated zoomIn');
+				$('.q3').removeClass('animated zoomIn');
+			};
+			if(n==2){
+				$('.page3-img2').addClass('animated wobble')
+			} else {
+				$('.page3-img2').removeClass('animated wobble')
+			};
+			if(n==3){
+				$('.page4-txt1').addClass('animated zoomIn')
+			} else {
+				$('.page4-txt1').removeClass('animated zoomIn')
+			};
+			//移除oBox的绑定事件
+			oBox.removeEventListener('touchmove', fnMove, false);
+			oBox.removeEventListener('touchend', fnEnd, false);
+
+			ev.preventDefault();
+        }
+
+        //为oBox 添加绑定事件
+        oBox.addEventListener('touchmove', fnMove, false);
+        oBox.addEventListener('touchend', fnEnd, false);
+        ev.preventDefault();
+		}, false);
+    });
+
+   
+    //page1行走的人
+    $(function(){
+            var oPerson = document.getElementById('person');
+            var oImg = oPerson.getElementsByTagName('img')[0];
+            var i=0;
+            setInterval(function(){
+	        	var arr=['images/page1_man1.gif','images/page1_man2.gif','images/page1_man3.gif','images/page1_man4.gif','images/page1_man5.gif',];
+	        	oImg.src=arr[i];
+	        	if(i>=arr.length-1){
+	        		i=-1;
+	        	};
+	        	i++;
+                   
+            },200);   
+    });
+
+    </script>
+  </head>
+  <body>
+    <div class="box" id="banner">
+      <ul id="ul1">
+
+        <li class="page1">
+        	<div class="page1-txt "><img src="images/page1_txt.gif"></div>
+
+        	<div class="page1-move">
+        		<div class="person" id="person">
+        			<img src="images/page1_man1.gif">
+        		</div>
+        		<div class="earth earth1"><img src="images/page1_earth.gif"></div>
+        		<div class="earth-round earth-round1"><img src="images/page1_city.gif"></div>
+        	</div>
+        </li>
+
+        <li class="page2">
+        	<!-- 上边文字 -->
+        	<div class="page2-txt1">
+        		<img class="img1" src="images/page2_date.gif">
+        		<img class="img2" src="images/page2_title.gif">
+        	</div>
+        	<div class="page2-txt2">
+        		<img src="images/page2_dosome.gif">
+        	</div>
+			<!-- 下边图片 -->
+        	<div class="page1-move">
+        		<div class="person" id="person">
+        			<img class="page2-person" src="images/page2_man.gif">
+        			<div class="q1"><img src="images/page2_q1.gif"></div>
+	        		<div class="q2"><img src="images/page2_q2.gif"></div>
+	        		<div class="q3"><img src="images/page2_q3.gif"></div>
+        		</div>
+        		<div class="earth"><img src="images/page1_earth.gif"></div>
+        		<div class="earth-round"><img src="images/page1_city.gif"></div>
+        	</div>
+        </li>
+        <li class="page3">
+        	<div class="page3-txt1"><img src="images/page3_title.png"></div>
+        	<div class="page3-txt2">
+        		<img class="page3-img1" src="images/page3_shake_txt.gif">
+        		<img class="page3-img2" src="images/page3_shake.png">
+        	</div>
+        </li>
+        <li class="page4">
+        	<div class="page4-txt1"><img src="images/page4_title.gif"></div>
+        	<div class="page4-txt2"><img src="images/page4_foot.gif"></div>
+        </li>
+      </ul>
+    </div>
+   
+  </body>
+</html>
